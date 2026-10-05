@@ -1,0 +1,42 @@
+[
+  {
+    "id": "EX-01",
+    "text": "Started calibrating pressure transmitter PT-220 in Process Train 2 at 08:15 on 2026-09-29; progress is 45%.",
+    "date": "2026-09-29",
+    "discipline": "Instrumentation",
+    "target_activity_id": "INS-L6-008",
+    "expected_fields": {"discipline": "Instrumentation", "equipmentTag": "PT-220", "location": "Process Train 2", "eventDate": "2026-09-29", "actualStart": "2026-09-29", "startTime": "08:15", "progress": 45, "eventStatus": "started"}
+  },
+  {
+    "id": "EX-02",
+    "text": "Line 24-XX pipe spool erection started at 7:30 am on 2026-09-30 in Unit B. Four spools are fitted; 65% complete.",
+    "date": "2026-09-30",
+    "discipline": "Piping",
+    "target_activity_id": "PIP-L6-042",
+    "expected_fields": {"discipline": "Piping", "lineTag": "24-XX", "location": "Unit B", "eventDate": "2026-09-30", "actualStart": "2026-09-30", "startTime": "07:30", "progress": 65, "eventStatus": "started"}
+  },
+  {
+    "id": "EX-03",
+    "text": "Cooling water header CW-04 hydrostatic pressure test completed on 2026-09-30 in Utility Corridor; progress 100%.",
+    "date": "2026-09-30",
+    "discipline": "Piping",
+    "target_activity_id": "PIP-L6-057",
+    "expected_fields": {"discipline": "Piping", "equipmentTag": "CW-04", "location": "Utility Corridor", "eventDate": "2026-09-30", "actualEnd": "2026-09-30", "progress": 100, "eventStatus": "complete"}
+  },
+  {
+    "id": "EX-04",
+    "text": "Civil backfill in Zone C cannot start until buried utility clearance is signed; crew moved to another work front.",
+    "date": "2026-09-30",
+    "discipline": "Civil",
+    "target_activity_id": "CIV-L6-022",
+    "expected_fields": {"discipline": "Civil", "blocker": "buried utility clearance is signed"}
+  },
+  {
+    "id": "EX-05",
+    "text": "Activity PIP-L6-043: weld Line 24-XX spool joints in Unit B. Work started, but supervisor did not record the event date.",
+    "date": "2026-09-30",
+    "discipline": "Piping",
+    "target_activity_id": "PIP-L6-043",
+    "expected_fields": {"discipline": "Piping", "activityId": "PIP-L6-043", "lineTag": "24-XX", "location": "Unit B", "eventStatus": "started", "actualStart": ""}
+  }
+]

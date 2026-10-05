@@ -1,0 +1,69 @@
+{
+  "fixture": "synthetic labeled examples; local deterministic extraction and heuristic ranking",
+  "example_count": 5,
+  "field_checks": 31,
+  "field_exact_matches": 31,
+  "field_exact_match_rate": 1.0,
+  "nonempty_expected_facts": 30,
+  "nonempty_expected_facts_exact": 30,
+  "nonempty_fact_recall": 1.0,
+  "top1_matches": 5,
+  "top1_rate": 1.0,
+  "top3_matches": 5,
+  "top3_rate": 1.0,
+  "cases": [
+    {
+      "id": "EX-01",
+      "expected_activity_id": "INS-L6-008",
+      "ranked_activity_ids": [
+        "INS-L6-008"
+      ],
+      "top1_hit": true,
+      "top3_hit": true
+    },
+    {
+      "id": "EX-02",
+      "expected_activity_id": "PIP-L6-042",
+      "ranked_activity_ids": [
+        "PIP-L6-042",
+        "PIP-L6-043",
+        "PIP-L6-044"
+      ],
+      "top1_hit": true,
+      "top3_hit": true
+    },
+    {
+      "id": "EX-03",
+      "expected_activity_id": "PIP-L6-057",
+      "ranked_activity_ids": [
+        "PIP-L6-057",
+        "PIP-L6-045",
+        "PIP-L6-044"
+      ],
+      "top1_hit": true,
+      "top3_hit": true
+    },
+    {
+      "id": "EX-04",
+      "expected_activity_id": "CIV-L6-022",
+      "ranked_activity_ids": [
+        "CIV-L6-022",
+        "CIV-L6-014"
+      ],
+      "top1_hit": true,
+      "top3_hit": true
+    },
+    {
+      "id": "EX-05",
+      "expected_activity_id": "PIP-L6-043",
+      "ranked_activity_ids": [
+        "PIP-L6-043",
+        "PIP-L6-042",
+        "PIP-L6-044"
+      ],
+      "top1_hit": true,
+      "top3_hit": true
+    }
+  ],
+  "caveat": "Small synthetic fixture only. Scores are heuristic and this result is not a production accuracy or calibration claim."
+}

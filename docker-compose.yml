@@ -1,0 +1,67 @@
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: sitelink
+      POSTGRES_USER: sitelink
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U sitelink -d sitelink"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  app:
+    build: .
+    restart: unless-stopped
+    environment:
+      HOST: 0.0.0.0
+      PORT: 8000
+      DATABASE_URL: postgresql://sitelink:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}@db:5432/sitelink
+      REQUIRE_SETUP_TOKEN: ${REQUIRE_SETUP_TOKEN:-1}
+      SETUP_TOKEN: ${SETUP_TOKEN:?Set SETUP_TOKEN in .env}
+      SIGNUP_TENANT_ID: ${SIGNUP_TENANT_ID:-tenant-default}
+      PUBLIC_SIGNUP: ${PUBLIC_SIGNUP:-1}
+      SESSION_HOURS: ${SESSION_HOURS:-12}
+      COOKIE_SECURE: ${COOKIE_SECURE:-auto}
+      TRUST_PROXY_HEADERS: "1"
+      TIME_AGENT_ENABLED: ${TIME_AGENT_ENABLED:-0}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      TIME_AGENT_MODEL: ${TIME_AGENT_MODEL:-}
+      TIME_AGENT_API_URL: ${TIME_AGENT_API_URL:-https://api.openai.com/v1/responses}
+      TIME_AGENT_TIMEOUT_SECONDS: ${TIME_AGENT_TIMEOUT_SECONDS:-12}
+    depends_on:
+      db:
+        condition: service_healthy
+    expose:
+      - "8000"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/health', timeout=3)"]
+      interval: 20s
+      timeout: 5s
+      retries: 5
+
+  proxy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      app:
+        condition: service_healthy
+
+volumes:
+  postgres_data:
+  caddy_data:
+  caddy_config:

@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f7f8fa">
+  <meta name="description" content="SiteLink is an authenticated prototype for turning infrastructure site reports into reviewed schedule updates.">
+  <title>SiteLink — Project progress, connected</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="authGate" class="auth-gate"><div class="auth-card"><div class="brand-lockup auth-brand"><div class="brand-mark"><span class="brand-mark-a"></span><span class="brand-mark-b"></span><span class="brand-mark-c"></span></div><div><div class="brand-name">sitelink<span>™</span></div><div class="brand-caption">FIELD TO SCHEDULE</div></div></div><div class="auth-loading"><span class="live-dot"></span><span>Checking secure workspace…</span></div></div></div>
+  <div class="app-frame" id="appFrame">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand-lockup">
+        <div class="brand-mark"><span class="brand-mark-a"></span><span class="brand-mark-b"></span><span class="brand-mark-c"></span></div>
+        <div><div class="brand-name">sitelink<span>™</span></div><div class="brand-caption">FIELD TO SCHEDULE</div></div>
+      </div>
+
+      <button class="project-switcher" id="projectSwitcher" aria-label="Current project">
+        <span class="project-avatar">SP</span><span class="project-meta"><strong>Synthetic Process Facility</strong><small>Demo Infrastructure Group · Phase 02</small></span><span class="chevron">⌄</span>
+      </button>
+
+      <nav class="task-navigation" aria-label="Workspace navigation">
+        <details class="nav-group" data-nav-group="home" open>
+          <summary class="nav-group-summary">Home</summary>
+          <div class="primary-nav"><button class="nav-item active" data-view="overview"><span class="nav-icon">▦</span><span>Project overview</span></button></div>
+        </details>
+        <details class="nav-group" data-nav-group="capture-review" open>
+          <summary class="nav-group-summary">Capture &amp; Review</summary>
+          <div class="primary-nav">
+            <button class="nav-item" data-view="today"><span class="nav-icon">◷</span><span>Today &amp; work log</span></button>
+            <button class="nav-item" data-view="inbox"><span class="nav-icon">⇥</span><span>Report inbox</span><span class="nav-count nav-count-accent" id="navInboxCount">0</span></button>
+          </div>
+        </details>
+        <button class="nav-item nav-ai-entry" data-view="agent" aria-label="AI Agent"><span class="nav-icon">✧</span><span>AI Agent</span><span class="nav-ai-badge" aria-hidden="true">AI</span></button>
+        <details class="nav-group" data-nav-group="attention">
+          <summary class="nav-group-summary">Needs attention</summary>
+          <div class="primary-nav">
+            <button class="nav-item" data-view="risks"><span class="nav-icon">⚑</span><span>Risks &amp; issues</span></button>
+            <button class="nav-item" data-view="conflicts"><span class="nav-icon">⚠</span><span>Conflict center</span><span class="nav-count nav-count-accent" id="navConflictCount">0</span></button>
+            <button class="nav-item" data-view="missing"><span class="nav-icon">◷</span><span>Missing updates</span><span class="nav-count" id="navMissingCount">0</span></button>
+          </div>
+        </details>
+        <details class="nav-group" data-nav-group="intelligence">
+          <summary class="nav-group-summary">Intelligence</summary>
+          <div class="primary-nav">
+            <button class="nav-item" data-view="execution"><span class="nav-icon">↗</span><span>Execution analysis</span></button>
+          </div>
+        </details>
+        <details class="nav-group" data-nav-group="plan">
+          <summary class="nav-group-summary">Project</summary>
+          <div class="primary-nav">
+            <button class="nav-item" data-view="schedule"><span class="nav-icon">▤</span><span>Activity register</span><span class="nav-count" id="navTaskCount">0</span></button>
+            <button class="nav-item" data-view="plans"><span class="nav-icon">▧</span><span>Plans &amp; baselines</span></button>
+            <button class="nav-item" data-view="areas"><span class="nav-icon">⌘</span><span>Project areas</span></button>
+          </div>
+        </details>
+        <details class="nav-group" data-nav-group="ai">
+          <summary class="nav-group-summary">SiteLink AI</summary>
+          <div class="primary-nav">
+            <button class="nav-item" data-view="sitelink-ai"><span class="nav-icon">✧</span><span>Ask &amp; investigate</span></button>
+            <button class="nav-item" data-view="memory"><span class="nav-icon">◈</span><span>Execution memory</span></button>
+            <button class="nav-item" data-view="insights"><span class="nav-icon">◒</span><span>Evidence insights</span></button>
+          </div>
+        </details>
+        <details class="nav-group" data-nav-group="governance">
+          <summary class="nav-group-summary">More</summary>
+          <div class="primary-nav">
+            <button class="nav-item" data-view="audit"><span class="nav-icon">◷</span><span>Audit trail</span></button>
+            <button class="nav-item hidden" id="usersNav" data-view="users"><span class="nav-icon">♙</span><span>Users &amp; roles</span></button>
+          </div>
+        </details>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="data-mode-card"><span class="live-dot"></span><div><strong>ROLE-PROTECTED WORKSPACE</strong><small>Server sessions · project access checked</small></div><span class="lock-icon">⌑</span></div>
+        <div class="profile-row"><div class="profile-avatar" id="sidebarUserInitials">PP</div><div class="profile-copy"><strong id="sidebarUserName">Project Planner</strong><small id="sidebarUserRole">Project controls</small></div><button class="more-button" id="changePasswordButton" aria-label="Change password" title="Change password">⌑</button><button class="more-button" id="logoutButton" aria-label="Sign out" title="Sign out">↪</button></div>
+      </div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <button class="mobile-menu" id="mobileMenu" aria-label="Open menu">☰</button>
+        <div class="topbar-crumb"><span>PROJECTS</span><span class="crumb-slash">/</span><strong>SYNTHETIC PROCESS FACILITY</strong></div>
+        <div class="topbar-actions"><div class="sync-status"><span class="sync-dot"></span>Shared server · refreshes every 10s <span class="sync-divider"></span><span id="todayDate">—</span></div><button class="topbar-ask" id="globalAskButton" title="Ask a question about this project’s reviewed execution data">◉ <span>Ask SiteLink</span></button><button class="icon-button" id="helpButton" title="About this prototype">?</button><div class="topbar-avatar">PP</div></div>
+      </header>
+
+      <div class="page-wrap">
+        <div class="network-banner"><strong>V4 SERVER WORKSPACE</strong><span>Use HTTPS through a reverse proxy before exposing this prototype on the public internet.</span><span class="network-url-label">Server address: <code id="teamUrl">—</code></span></div>
+        <section class="page-heading">
+          <div><div class="eyebrow" id="pageEyebrow">PROJECT CONTROL CENTER <span class="eyebrow-line"></span> PHASE 02</div><h1 id="pageTitle">Project control center<span class="heading-period">.</span></h1><p id="pageDescription">One view of what was planned, what happened on site, and what needs a decision.</p></div>
+          <div class="heading-actions"><button class="button button-secondary" id="exportButton"><span class="button-icon">↓</span> Export data</button><button class="button button-primary" id="logUpdateButton"><span class="plus-icon">＋</span> Log an update</button></div>
+        </section>
+
+        <section id="viewRoot" aria-live="polite"></section>
+        <footer class="app-footer"><span><strong>SITELINK</strong> · SIH26122 v4 concept prototype</span><span>Workspace records stay in the configured server database <span class="footer-shield">◆</span></span></footer>
+      </div>
+    </main>
+  </div>
+
+  <div id="modalRoot"></div>
+  <div id="toastRoot" class="toast-stack" aria-live="polite"></div>
+  <input type="file" id="reportFileInput" accept=".txt,.csv,.xlsx,text/plain,text/csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" hidden>
+  <input type="file" id="scheduleFileInput" accept=".csv,.xlsx,.xml,text/csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/xml,text/xml" hidden>
+  <input type="file" id="scanFileInput" accept=".png,.jpg,.jpeg,.tif,.tiff,.bmp,.webp,.pdf,image/*,application/pdf" hidden>
+  <input type="file" id="planFileInput" accept=".csv,.xlsx,.xml,.pdf,.png,.jpg,.jpeg,.tif,.tiff,.bmp,.webp,text/csv,application/pdf,application/xml" hidden>
+  <input type="file" id="documentFileInput" accept=".pdf,.png,.jpg,.jpeg,.tif,.tiff,.bmp,.webp,.csv,.xlsx,.xml,.txt,.doc,.docx,image/*,application/pdf" multiple hidden>
+  <script src="app.js"></script>
+  <script src="sitelink-home-ui.js"></script>
+  <script src="project-control-ui.js"></script>
+  <script src="execution-intelligence-ui.js"></script>
+  <script src="sitelink-ai-ui.js"></script>
+</body>
+</html>

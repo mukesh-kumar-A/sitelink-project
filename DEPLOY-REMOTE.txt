@@ -1,0 +1,66 @@
+SITELINK v4 — REMOTE TEAM DEPLOYMENT
+
+This makes one shared SiteLink server reachable over HTTPS from different
+networks. A zip file alone cannot host the app: you need a Linux VPS/cloud server
+with a public IP and a domain name that you control.
+
+BEFORE YOU START
+1. Create a Linux VPS and note its public IPv4 address.
+2. Create a DNS A record for your domain (for example sitelink.example.com)
+   pointing to that public IP. Remove any incorrect AAAA record unless IPv6 is
+   configured on the server.
+3. In the VPS/cloud firewall, allow inbound TCP ports 80 and 443. Do not open
+   port 8000 publicly.
+4. Install Docker Engine and the Docker Compose plugin on the VPS.
+
+DEPLOY
+1. Upload and extract this whole project folder on the VPS. Enter the folder.
+2. Create the private settings file:
+
+   cp .env.example .env
+
+3. Generate two different secrets:
+
+   openssl rand -hex 32
+   openssl rand -hex 32
+
+4. Edit .env and replace the sample values:
+   - SITE_DOMAIN: your real DNS name, without http:// or https://
+   - POSTGRES_PASSWORD: the first generated secret
+   - SETUP_TOKEN: the second generated secret
+   - Keep REQUIRE_SETUP_TOKEN=1 for first setup
+   - Keep PUBLIC_SIGNUP=1 to let teammates request accounts
+   - Keep COOKIE_SECURE=auto
+
+   Do not upload, email, or commit the completed .env file.
+
+5. Start the app, database, and HTTPS proxy:
+
+   docker compose up -d --build
+   docker compose ps
+   docker compose logs -f app proxy
+
+   Caddy will request an HTTPS certificate after DNS is pointed at this VPS and
+   ports 80/443 are reachable. The app may take a minute to start.
+
+6. On a browser, open https://YOUR-DOMAIN. Create the first Admin account and
+   provide SETUP_TOKEN when asked. Once that account is created, edit .env to
+   set REQUIRE_SETUP_TOKEN=0, then apply it:
+
+   docker compose up -d app
+
+7. Share only https://YOUR-DOMAIN with teammates. They can use it from home,
+   office, or mobile networks. New signups stay pending until an Admin approves
+   them and assigns their role and project access.
+
+TROUBLESHOOT
+- Check `docker compose ps` and `docker compose logs app proxy db`.
+- Verify the domain's DNS points to the VPS public IP.
+- Verify ports 80 and 443 are allowed in both the cloud firewall and server
+  firewall.
+- Do not use the server's private 192.168.x.x address with remote teammates.
+- Do not expose port 8000; Caddy handles public HTTPS and forwards traffic to the
+  app over the private Docker network.
+
+PostgreSQL and public HTTPS deployment need to be exercised on the chosen VPS.
+Keep the records synthetic until the deployment has been reviewed and backed up.

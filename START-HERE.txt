@@ -1,0 +1,71 @@
+SITELINK v4 — QUICK START
+
+LOCAL WINDOWS DEMO (SQLite)
+1. Install Python 3.10 or newer.
+2. In VS Code open this folder and open Terminal > New Terminal.
+3. Run:
+
+   py server.py
+
+   If `py` is not recognized, run `python server.py`.
+4. Open http://127.0.0.1:8000 on the server PC and create the first Admin
+   account. There are no default accounts or passwords.
+5. To let teammates on the same Wi-Fi/LAN connect, set that Windows network to
+   Private, then right-click ALLOW-TEAM-ACCESS.bat and choose Run as administrator.
+   Start SiteLink and use the Team URL printed in its server window. Teammates
+   must enter that exact URL while connected to the same Wi-Fi/LAN.
+6. Use Users & roles to create teammate accounts, assign their roles, and select
+   which projects they can open. Use Create project / Manage members to create
+   isolated projects and tune the permissions.
+
+If the Team URL still times out, check that the server is running, the IP in the
+URL is current, and both devices are on the same network. Some phone hotspots
+and guest Wi-Fi networks block connections between devices. A 192.168.x.x URL
+works only on that local network, not for teammates elsewhere.
+
+DIFFERENT NETWORKS (PUBLIC HTTPS DEPLOYMENT)
+Use the Docker Compose + PostgreSQL + Caddy steps in README.md. The VPS needs a
+real domain, DNS pointing to it, and inbound TCP 80/443. Teammates then open the
+same https://your-domain address from any network; they do not install Python.
+Do not expose the built-in HTTP port 8000 to the public internet.
+
+MIGRATE YOUR EXISTING v3 SQLITE DATA
+Stop v3, make a backup, copy its data/sitelink.sqlite3 into this v4 folder's
+`data` directory, and start v4. The automatic migration assigns that old data to
+the default project in this workspace. This migration does not copy SQLite data
+into PostgreSQL.
+
+REPORT FLOW AND FILES
+Supervisors can type/dictate or scan a diary photo/PDF from AI Time Agent. Review
+the OCR text before analysis. Reports and schedules accept CSV/XLSX; schedules
+also accept and export Microsoft Project MSPDI XML through a labeled adapter.
+The Planner reviews evidence, then approves, rejects, or keeps a report
+unmatched. Only approval updates schedule actuals. See README.md for OCR/LLM
+configuration, supported columns, measured synthetic fixture, and judge demo.
+
+NEW PROJECT CONTROL SCREENS
+Plans & baselines stores imported versions; analyze and edit proposals, then
+approve to create a new baseline snapshot. Today & work log accepts dated,
+evidence-backed progress/start/finish updates. A Planner or Project Manager
+must approve a field update before schedule actuals change. Project areas and
+Risks & issues are project-scoped and audited. Missing work dates are required
+from the submitter; SiteLink does not fill them from the received date.
+
+EXECUTION INTELLIGENCE WALKTHROUGH
+As Admin, open Execution intelligence and choose Load synthetic story in a
+disposable demo project. Trace the labeled material diary through the live
+dependency impact graph, compare a recovery estimate, approve a recommendation,
+and record a measured outcome. Scenario approval creates an action but does not
+change schedule actuals; only the existing planner-approved daily update does.
+See README.md for assumptions, limits, and the full demo script.
+
+CHECKS
+Run `py -m py_compile server.py project_control.py execution_intelligence.py intelligence.py imports.py evaluate_examples.py`,
+`py -m unittest discover -s tests -v`, `py evaluate_examples.py`, and
+`node --check app.js`, `node --check project-control-ui.js`, and
+`node --check execution-intelligence-ui.js` from this folder.
+PostgreSQL, Tesseract/Poppler OCR, and
+public HTTPS deployment still need staging checks on the target server.
+
+Keep the included records synthetic. Read README.md for full setup, environment,
+backup, and deployment details.

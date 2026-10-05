@@ -1,0 +1,7 @@
+report_id,report_date,discipline,text,reporter,actual_start,actual_end,progress,activity_id
+RPT-SAMPLE-01,2026-09-29,Piping,"Piping team erected four spools on Line 24-XX in Unit B today. The activity is around 65% complete; fit-up checks continue on the north side.",R. Das - Site supervisor,2026-09-26,,65,PIP-L6-042
+RPT-SAMPLE-02,2026-09-29,Electrical,"Cable tray installation at Substation A finished today. Inspection passed; close the activity.",M. Nair - Electrical lead,,2026-09-29,100,ELE-L5-019
+RPT-SAMPLE-03,2026-09-29,Instrumentation,"Started calibration of PT-220 pressure transmitter in Process Train 2. Initial loop check is complete.",S. Roy - Instrument lead,2026-09-29,,45,INS-L6-008
+RPT-SAMPLE-04,2026-09-28,Civil,"Backfill activity in Zone C cannot start until the buried utility clearance is signed. Crew reassigned to north access road.",A. Kumar - Civil supervisor,,,,
+RPT-SAMPLE-05,2026-09-29,Piping,"Contractor daily report: Line 24-XX pipe installation is 80% complete. Crew waiting on carbon-steel fittings from stores.",ABC Piping contractor,,,80,PIP-L6-042
+RPT-SAMPLE-06,2026-08-24,Piping,"Pipe spool erection on Line 23-XX completed at 100% on 24 Aug 2026. Work was delayed by material availability; delivery came late.",ABC Piping contractor,2026-08-20,2026-08-24,100,PIP-L6-040
